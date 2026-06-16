@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ellen Matsei | Data Scientist & Strategic Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0D0D0D;
+    --paper: #F7F5F0;
+    --accent: #1A5CFF;
+    --accent-dark: #0D3DB5;
+    --gold: #C9993A;
+    --mid: #6B6B6B;
+    --rule: #E0DDD7;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(247, 245, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 4rem 4rem 4rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.4rem;
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.03em; color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 600; color: var(--mid);
+    letter-spacing: 0.01em; margin-bottom: 2rem;
+    border-left: 3px solid var(--gold); padding-left: 1rem;
+  }
+  .hero-summary {
+    font-size: 1rem; color: var(--mid); max-width: 480px;
+    line-height: 1.75; margin-bottom: 2.8rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block; padding: 0.85rem 2rem;
+    background: var(--accent); color: var(--white);
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block; padding: 0.85rem 2rem;
+    background: transparent; color: var(--ink);
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none; border: 2px solid var(--ink); cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--white); transform: translateY(-2px); }
+
+  .hero-right {
+    background: var(--ink);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    align-items: flex-start;
+    padding: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-right-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0D0D0D 60%, #1A5CFF22 100%);
+  }
+  .stats-grid {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem;
+    width: 100%;
+  }
+  .stat-item { border-top: 2px solid #FFFFFF22; padding-top: 1.2rem; }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.2rem; font-weight: 800; line-height: 1;
+    color: var(--white); letter-spacing: -0.04em;
+  }
+  .stat-number span { color: var(--accent); }
+  .stat-label {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #FFFFFF88; margin-top: 0.4rem;
+  }
+  .hero-badge {
+    position: absolute; top: 3rem; right: 3rem; z-index: 3;
+    width: 120px; height: 120px;
+    border: 2px solid #FFFFFF22; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; animation: spin-badge 20s linear infinite;
+  }
+  @keyframes spin-badge {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .hero-badge svg {
+    position: absolute; width: 100%; height: 100%;
+  }
+  .hero-badge-center {
+    font-family: 'Syne', sans-serif; font-size: 0.55rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); text-align: center;
+    line-height: 1.3; animation: spin-badge 20s linear infinite reverse;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.1;
+    color: var(--ink); margin-bottom: 3rem;
+  }
+
+  /* ── EXPERTISE ── */
+  .expertise { background: var(--white); }
+  .expertise-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    border: 1.5px solid var(--rule);
+  }
+  .expertise-card {
+    padding: 2.2rem; border: 1.5px solid var(--rule);
+    transition: background 0.25s;
+  }
+  .expertise-card:hover { background: #F0F4FF; }
+  .expertise-icon {
+    font-size: 1.6rem; margin-bottom: 1rem;
+  }
+  .expertise-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+    margin-bottom: 0.6rem; color: var(--ink);
+  }
+  .expertise-card p {
+    font-size: 0.88rem; color: var(--mid); line-height: 1.65;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience { background: var(--paper); }
+  .exp-container { max-width: 900px; }
+  .exp-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 2rem; padding: 2.4rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta {}
+  .exp-period {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+  }
+  .exp-org {
+    font-size: 0.82rem; color: var(--mid); line-height: 1.4;
+  }
+  .exp-content h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.9rem;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.9rem; color: var(--mid); padding: 0.3rem 0;
+    padding-left: 1.1rem; position: relative; line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem;
+  }
+
+  /* ── ACCOMPLISHMENTS ── */
+  .accomplishments { background: var(--ink); color: var(--white); }
+  .accomplishments .section-title { color: var(--white); }
+  .accl-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px;
+  }
+  .accl-card {
+    padding: 2.4rem; border: 1px solid #FFFFFF14;
+    transition: border-color 0.2s;
+  }
+  .accl-card:hover { border-color: var(--accent); }
+  .accl-card .accl-num {
+    font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .accl-card p { font-size: 0.9rem; color: #FFFFFFAA; line-height: 1.7; }
+
+  /* ── TOOLS ── */
+  .tools { background: var(--white); }
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .tool-tag {
+    padding: 0.7rem 1rem; border: 1.5px solid var(--rule);
+    font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 600;
+    text-align: center; color: var(--ink);
+    transition: all 0.2s;
+  }
+  .tool-tag:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .tool-tag.highlight { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+  /* ── EDUCATION ── */
+  .education { background: var(--paper); }
+  .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .edu-card {
+    padding: 2rem; border: 1.5px solid var(--rule); background: var(--white);
+  }
+  .edu-degree {
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.4rem;
+  }
+  .edu-school { font-size: 0.85rem; color: var(--mid); margin-bottom: 0.3rem; }
+  .edu-years {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--accent); color: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+  }
+  .contact .section-label { color: #FFFFFF99; }
+  .contact .section-title { color: var(--white); margin-bottom: 1rem; }
+  .contact-sub { font-size: 1rem; color: #FFFFFFCC; max-width: 380px; line-height: 1.7; }
+  .contact-details { display: flex; flex-direction: column; gap: 1.4rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; }
+  .contact-item-icon {
+    width: 44px; height: 44px; background: #FFFFFF22;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-item-text { font-size: 0.95rem; color: var(--white); }
+  .contact-item-label {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #FFFFFF88; display: block; margin-bottom: 0.1rem;
+  }
+  .contact-cta {
+    margin-top: 2rem;
+    display: inline-block; padding: 0.9rem 2.2rem;
+    background: var(--white); color: var(--accent);
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .contact-cta:hover { background: var(--ink); color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: #FFFFFF66;
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem;
+  }
+  footer strong { color: var(--white); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .hero-right { padding: 3rem 1.5rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 4rem 1.5rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .accl-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .edu-grid { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; text-align: center; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">EM</a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#accomplishments">Accomplishments</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for Remote & Freelance Engagements</div>
+    <h1 class="hero-name">Ellen<br><span>Matsei</span></h1>
+    <div class="hero-title">Data Scientist &nbsp;·&nbsp; Economic Analyst &nbsp;·&nbsp; Strategic Advisor</div>
+    <p class="hero-summary">
+      20+ years turning complex agricultural, economic, and financial datasets into decisions that shape national policy. From ministerial dashboards to international reporting at the UN, FAO and OECD — I bring the full stack of data strategy to your consulting engagement.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Hire Me</a>
+      <a href="#experience" class="btn-outline">See My Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 120 120">
+        <path id="circlePath" d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
+        <text font-size="9.5" fill="#C9993A" font-family="Inter,sans-serif" letter-spacing="3.5" font-weight="600">
+          <textPath href="#circlePath">DATA SCIENCE · CONSULTING · ANALYTICS ·</textPath>
+        </text>
+      </svg>
+      <div class="hero-badge-center">Power BI<br>Certified</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">20<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">6<span>+</span></div>
+        <div class="stat-label">Int'l Bodies Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1K<span>s</span></div>
+        <div class="stat-label">Farmer Records<br>Tracked via Power BI</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">MBA<span>+</span></div>
+        <div class="stat-label">BCom Hons<br>Econometrics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise reveal" id="expertise">
+  <div class="section-label">What I Bring</div>
+  <h2 class="section-title">Core Competencies</h2>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="expertise-icon">📊</div>
+      <h3>Statistical &amp; Econometric Modelling</h3>
+      <p>Time-series analysis, regression, forecasting, and econometric modelling using EViews, SPSS and Python (Pandas). From crop estimates to climate-change economic impact.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🗂️</div>
+      <h3>Data Pipelines &amp; Governance</h3>
+      <p>End-to-end pipelines — questionnaire design through field collection, cleaning, analysis and publication. SQL via Databricks, Snowflake and BigQuery. Rigorous data quality management.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">📈</div>
+      <h3>Power BI &amp; Dashboard Development</h3>
+      <p>Microsoft Power BI Certified. Built live executive dashboards for national farmer registers and sales analysis. Also proficient in Looker Studio and Data Studio.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🌍</div>
+      <h3>International Statistical Reporting</h3>
+      <p>Prepared and submitted official statistical responses to FAO, OECD, SADC, AfDB and IGC. Deep familiarity with international reporting frameworks and food-security indicators.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🔬</div>
+      <h3>Research Design &amp; M&amp;E</h3>
+      <p>Qualitative and quantitative research, SDG indicator development, survey methodology, census design, and results-based monitoring &amp; evaluation reporting.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🏛️</div>
+      <h3>Executive Advisory &amp; Leadership</h3>
+      <p>Board-level and ministerial briefings, budget and HR management, policy advisory. Represented South Africa at AU, OECD and UN international forums.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience reveal" id="experience">
+  <div class="section-label">Career History</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <div class="exp-container">
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Oct 2006 – Present</div>
+        <div class="exp-org">Department of Agriculture, Land Reform &amp; Rural Development</div>
+      </div>
+      <div class="exp-content">
+        <h3>Director: Statistics &amp; Economic Analysis — Data &amp; Analytics Lead</h3>
+        <ul class="exp-bullets">
+          <li>Designed and deployed Power BI dashboards to monitor the national Farmer Register, tracking thousands of smallholder records across provinces in real time.</li>
+          <li>Built econometric and forecasting models (EViews, SPSS) informing quarterly ministerial briefings.</li>
+          <li>Led end-to-end data pipelines: questionnaire design → field collection → cleaning → analysis → publication across crops, horticulture, and livestock statistics.</li>
+          <li>Responded to quantitative questionnaires from FAO, OECD, SADC, AfDB and IGC on food production and economic indicators.</li>
+          <li>Developed and tracked SDG indicators and food-security metrics; contributed climate-change economic impact analysis.</li>
+          <li>Represented South Africa at OECD, FAO/AFCAS, SADC and AU international forums on food systems, water security and climate economics.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Mar 2005 – Sep 2006</div>
+        <div class="exp-org">Department of Agriculture, Land Reform &amp; Rural Development</div>
+      </div>
+      <div class="exp-content">
+        <h3>Principal Statistician</h3>
+        <ul class="exp-bullets">
+          <li>Managed a team producing provincial agricultural statistical reports and year-on-year comparative analyses.</li>
+          <li>Designed farmer-facing questionnaires and facilitated provincial data-collection workshops.</li>
+          <li>Compiled and published provincial profiles covering production volumes, income, expenditure, and price indices.</li>
+          <li>Post-publication analysis of the Census of Commercial Agriculture and Crops &amp; Markets Estimates publications.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Jan 2003 – Feb 2005</div>
+        <div class="exp-org">Statistics South Africa</div>
+      </div>
+      <div class="exp-content">
+        <h3>Senior Survey Statistician</h3>
+        <ul class="exp-bullets">
+          <li>Collected, edited and processed data from Municipal Financial Statements to analyse local-government fiscal variables.</li>
+          <li>Built comparative tables and graphs for the Municipal Census, presenting findings to National Treasury and the National Electricity Regulator.</li>
+          <li>Analysed the impact of Fiscal Local Government Grant allocations using financial and non-financial survey data.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOMPLISHMENTS -->
+<section class="accomplishments reveal" id="accomplishments">
+  <div class="section-label">Impact Highlights</div>
+  <h2 class="section-title">Key Accomplishments</h2>
+  <div class="accl-grid">
+    <div class="accl-card">
+      <div class="accl-num">01</div>
+      <p>Conceptualised and introduced the national Producer / Farmer Register, officially launched by the Minister of Agriculture in 2022 — now a cornerstone data asset for monitoring and supporting smallholder farmers nationwide.</p>
+    </div>
+    <div class="accl-card">
+      <div class="accl-num">02</div>
+      <p>Delivered Power BI dashboards for the Farmer Register and Sales Assignment projects, providing executives with live data visibility across the entire agricultural sector.</p>
+    </div>
+    <div class="accl-card">
+      <div class="accl-num">03</div>
+      <p>Represented South Africa at OECD, FAO, IGC and SADC (AU) international forums, contributing quantitative analysis and official statistical responses that inform continental food-security strategies.</p>
+    </div>
+    <div class="accl-card">
+      <div class="accl-num">04</div>
+      <p>Participated in the Agricultural Economic Working Committee (AEWG), EXCO and Agricultural CEO's Forum, directly shaping national agricultural data strategy at the highest levels.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools reveal" id="tools">
+  <div class="section-label">Tech Stack</div>
+  <h2 class="section-title">Tools &amp; Technologies</h2>
+  <div class="tools-grid">
+    <div class="tool-tag highlight">Power BI ✓ Certified</div>
+    <div class="tool-tag">Python (Pandas)</div>
+    <div class="tool-tag">SQL</div>
+    <div class="tool-tag">Databricks</div>
+    <div class="tool-tag">Snowflake</div>
+    <div class="tool-tag">BigQuery</div>
+    <div class="tool-tag">EViews</div>
+    <div class="tool-tag">SPSS</div>
+    <div class="tool-tag">Looker Studio</div>
+    <div class="tool-tag">Excel (Advanced)</div>
+    <div class="tool-tag">Google Forms</div>
+    <div class="tool-tag">GitHub</div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="education reveal" id="education">
+  <div class="section-label">Academic Background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">BCom Honours – Economics / Econometrics</div>
+      <div class="edu-school">University of South Africa (UNISA)</div>
+      <div class="edu-years">2020 – 2024</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Masters in Business Administration (MBA)</div>
+      <div class="edu-school">Milpark Business School, Johannesburg</div>
+      <div class="edu-years">2010 – 2014</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Commerce – Economics &amp; Statistics</div>
+      <div class="edu-school">Vista University / University of Pretoria</div>
+      <div class="edu-years">1996 – 1999</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Data Science Training</div>
+      <div class="edu-school">Self-trained · Profile on GitHub · SQL, Python, Power BI, EViews</div>
+      <div class="edu-years">Feb – Apr 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal" id="contact">
+  <div>
+    <div class="section-label">Let's Work Together</div>
+    <h2 class="section-title">Ready for Your Next Data Challenge?</h2>
+    <p class="contact-sub">
+      Whether you need econometric modelling, a Power BI dashboard, statistical consulting, or end-to-end data strategy — I'm available for remote and freelance engagements globally.
+    </p>
+    <a href="mailto:ematsei@yahoo.com" class="contact-cta">Send Me a Message</a>
+  </div>
+  <div class="contact-details">
+    <div class="contact-item">
+      <div class="contact-item-icon">✉️</div>
+      <div class="contact-item-text">
+        <span class="contact-item-label">Email</span>
+        ematsei@yahoo.com
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">📱</div>
+      <div class="contact-item-text">
+        <span class="contact-item-label">Phone / WhatsApp</span>
+        +27 84 695 5489
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">📍</div>
+      <div class="contact-item-text">
+        <span class="contact-item-label">Location</span>
+        Pretoria, Gauteng, South Africa · Remote-Ready
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon">💼</div>
+      <div class="contact-item-text">
+        <span class="contact-item-label">Availability</span>
+        Freelance &amp; Remote Engagements
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 <strong>Ellen Matsei</strong>. All rights reserved.</div>
+  <div>Data Scientist · Economic Analyst · Pretoria, SA</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
